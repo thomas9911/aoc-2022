@@ -1,11 +1,11 @@
 #include <day0/lib.c>
 
 /* function returning the max between two numbers */
-int32_t max(int32_t num1, int32_t num2)
+long max_impl(long num1, long num2)
 {
 
     /* local variable declaration */
-    int32_t result;
+    long result;
 
     if (num1 > num2)
         result = num1;
@@ -15,7 +15,7 @@ int32_t max(int32_t num1, int32_t num2)
     return result;
 }
 
-int32_t bar_function(int32_t x)
+long bar_function(long x)
 {
     return x;
 }

@@ -1,9 +1,13 @@
 #include <stdint.h>
 
-int32_t bar_function(int32_t x);
+long bar_function(long x);
 
-int32_t max(int32_t num1, int32_t num2);
+long max_impl(long num1, long num2);
 
-int32_t day0a(const char *text);
+long day0a(const char *text);
 
-int32_t day0b(const char *text);
+long day0b(const char *text);
+
+long day0c(const char *text);
+
+long day0d(const char *text);

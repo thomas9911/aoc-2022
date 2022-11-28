@@ -25,19 +25,27 @@ pub fn bar_function(x: i32) -> i32 {
 }
 
 pub fn max(x: i32, y: i32) -> i32 {
-    unsafe { bindings::max(x, y) }
+    unsafe { bindings::max_impl(x, y) }
 }
 
 pub fn day0a() -> i32 {
     let s = read_to_cstring("data/day0/day0a.txt").unwrap();
-
     unsafe { bindings::day0a(s.as_ptr()) }
 }
 
 pub fn day0b() -> i32 {
     let s = read_to_cstring("data/day0/day0b.txt").unwrap();
-
     unsafe { bindings::day0b(s.as_ptr()) }
+}
+
+pub fn day0c() -> i32 {
+    let s = read_to_cstring("data/day0/day0c.txt").unwrap();
+    unsafe { bindings::day0c(s.as_ptr()) }
+}
+
+pub fn day0d() -> i32 {
+    let s = read_to_cstring("data/day0/day0d.txt").unwrap();
+    unsafe { bindings::day0d(s.as_ptr()) }
 }
 
 #[test]
@@ -59,4 +67,14 @@ fn day0a_test() {
 #[test]
 fn day0b_test() {
     assert_eq!(1600, day0b());
+}
+
+#[test]
+fn day0c_test() {
+    assert_eq!(1868935, day0c());
+}
+
+#[test]
+fn day0d_test() {
+    assert_eq!(1965970888, day0d());
 }
