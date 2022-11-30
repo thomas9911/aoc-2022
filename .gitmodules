@@ -1,0 +1,6 @@
+[submodule "include/hashmap.c"]
+	path = include/hashmap.c
+	url = https://github.com/tidwall/hashmap.c
+[submodule "include/CLIST"]
+	path = include/CLIST
+	url = https://github.com/AlexanderAgd/CLIST

@@ -16,8 +16,10 @@ fn main() {
 
     cc::Build::new()
         .include("lib")
-        .include("include")
-        .file("include/clist.c")
+        .include("include/CLIST")
+        .include("include/hashmap.c")
+        .file("include/CLIST/clist.c")
+        .file("include/hashmap.c/hashmap.c")
         .file("lib/wrapper.c")
         .compile("wrapper");
 }
