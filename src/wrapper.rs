@@ -4,11 +4,12 @@ use std::ffi::CString;
 use std::fs::read_to_string;
 
 fn read_to_cstring(path: &str) -> Result<CString, Box<dyn std::error::Error>> {
-    let input = read_to_string(path)?
+    let mut input = read_to_string(path)?
         .trim()
         .lines()
         .collect::<Vec<&str>>()
         .join("\n");
+    input.push('\n');
     let s = CString::new(input)?;
     Ok(s)
 }
@@ -41,6 +42,16 @@ pub fn day0d() -> i32 {
     unsafe { bindings::day0d(s.as_ptr()) }
 }
 
+pub fn day01a() -> i32 {
+    let s = read_to_cstring("data/day01/day01a.txt").unwrap();
+    unsafe { bindings::day01a(s.as_ptr()) }
+}
+
+pub fn day01b() -> i32 {
+    let s = read_to_cstring("data/day01/day01b.txt").unwrap();
+    unsafe { bindings::day01b(s.as_ptr()) }
+}
+
 #[test]
 fn max_test() {
     assert_eq!(2, max(2, 1));
@@ -59,7 +70,7 @@ fn day0a_test() {
 
 #[test]
 fn day0b_test() {
-    assert_eq!(1600, day0b());
+    assert_eq!(1601, day0b());
 }
 
 #[test]
@@ -70,4 +81,14 @@ fn day0c_test() {
 #[test]
 fn day0d_test() {
     assert_eq!(1965970888, day0d());
+}
+
+#[test]
+fn day01a_test() {
+    assert_eq!(69795, day01a());
+}
+
+#[test]
+fn day01b_test() {
+    assert_eq!(208437, day01b());
 }

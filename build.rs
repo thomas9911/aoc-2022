@@ -55,6 +55,7 @@ fn main() {
     println!("cargo:rerun-if-changed=include");
 
     cc::Build::new()
+        .warnings(false)
         .include("lib")
         .includes(includes())
         .files(compile_files())
