@@ -1,5 +1,6 @@
 #include <day0/lib.c>
 #include <day01/lib.c>
+#include <day02/lib.c>
 
 /* function returning the max between two numbers */
 long max_impl(long num1, long num2)

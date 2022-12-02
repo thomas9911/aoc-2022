@@ -52,6 +52,16 @@ pub fn day01b() -> i32 {
     unsafe { bindings::day01b(s.as_ptr()) }
 }
 
+pub fn day02a() -> i32 {
+    let s = read_to_cstring("data/day02/day02a.txt").unwrap();
+    unsafe { bindings::day02a(s.as_ptr()) }
+}
+
+pub fn day02b() -> i32 {
+    let s = read_to_cstring("data/day02/day02b.txt").unwrap();
+    unsafe { bindings::day02b(s.as_ptr()) }
+}
+
 #[test]
 fn max_test() {
     assert_eq!(2, max(2, 1));
@@ -91,4 +101,14 @@ fn day01a_test() {
 #[test]
 fn day01b_test() {
     assert_eq!(208437, day01b());
+}
+
+#[test]
+fn day02a_test() {
+    assert_eq!(12679, day02a());
+}
+
+#[test]
+fn day02b_test() {
+    assert_eq!(14470, day02b());
 }
