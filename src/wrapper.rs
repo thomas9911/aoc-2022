@@ -14,14 +14,6 @@ fn read_to_cstring(path: &str) -> Result<CString, Box<dyn std::error::Error>> {
     Ok(s)
 }
 
-pub fn bar_function(x: i32) -> i32 {
-    unsafe { bindings::bar_function(x) }
-}
-
-pub fn max(x: i32, y: i32) -> i32 {
-    unsafe { bindings::max_impl(x, y) }
-}
-
 pub fn day0a() -> i32 {
     let s = read_to_cstring("data/day0/day0a.txt").unwrap();
     unsafe { bindings::day0a(s.as_ptr()) }

@@ -4,17 +4,6 @@ pub mod wrapper;
 use wrapper::*;
 
 #[test]
-fn max_test() {
-    assert_eq!(2, max(2, 1));
-    assert_eq!(5, max(2, 5));
-}
-
-#[test]
-fn bar_function_test() {
-    assert_eq!(2, bar_function(2));
-}
-
-#[test]
 fn day0a_test() {
     assert_eq!(1559, day0a());
 }

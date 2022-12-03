@@ -13,15 +13,6 @@ extern "C" {
     pub fn __report_gsfailure(_StackCookie: usize) -> !;
 }
 extern "C" {
-    pub fn bar_function(x: ::std::os::raw::c_long) -> ::std::os::raw::c_long;
-}
-extern "C" {
-    pub fn max_impl(
-        num1: ::std::os::raw::c_long,
-        num2: ::std::os::raw::c_long,
-    ) -> ::std::os::raw::c_long;
-}
-extern "C" {
     pub fn day0a(text: *const ::std::os::raw::c_char) -> ::std::os::raw::c_long;
 }
 extern "C" {
