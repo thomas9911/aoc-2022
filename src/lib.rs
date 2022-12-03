@@ -1,7 +1,21 @@
+pub mod day03;
 pub mod wrapper;
+
+use std::fs::read_to_string;
 
 #[cfg(test)]
 use wrapper::*;
+
+pub fn load_to_string(path: &str) -> Result<String, Box<dyn std::error::Error>> {
+    let mut input = read_to_string(path)?
+        .trim()
+        .lines()
+        .collect::<Vec<&str>>()
+        .join("\n");
+    input.push('\n');
+
+    Ok(input)
+}
 
 #[test]
 fn day0a_test() {
@@ -45,10 +59,10 @@ fn day02b_test() {
 
 #[test]
 fn day03a_test() {
-    assert_eq!(1234, day03a());
+    assert_eq!(7831, day03::day03a());
 }
 
 #[test]
 fn day03b_test() {
-    assert_eq!(1234, day03b());
+    assert_eq!(2683, day03::day03b());
 }

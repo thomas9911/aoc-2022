@@ -54,12 +54,12 @@ pub fn day02b() -> i32 {
     unsafe { bindings::day02b(s.as_ptr()) }
 }
 
-pub fn day03a() -> i32 {
-    let s = read_to_cstring("data/day03/day03a.txt").unwrap();
-    unsafe { bindings::day03a(s.as_ptr()) }
-}
+// pub fn day03a() -> i32 {
+//     let s = read_to_cstring("data/day03/day03a.txt").unwrap();
+//     unsafe { bindings::day03a(s.as_ptr()) }
+// }
 
-pub fn day03b() -> i32 {
-    let s = read_to_cstring("data/day03/day03b.txt").unwrap();
-    unsafe { bindings::day03b(s.as_ptr()) }
-}
+// pub fn day03b() -> i32 {
+//     let s = read_to_cstring("data/day03/day03b.txt").unwrap();
+//     unsafe { bindings::day03b(s.as_ptr()) }
+// }
