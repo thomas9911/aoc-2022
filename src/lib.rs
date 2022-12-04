@@ -76,3 +76,13 @@ fn day03b_rust_test() {
 // fn day03b_test() {
 //     assert_eq!(2683, day03b());
 // }
+
+#[test]
+fn day04a_test() {
+    assert_eq!(433, day04a());
+}
+
+#[test]
+fn day04b_test() {
+    assert_eq!(852, day04b());
+}
