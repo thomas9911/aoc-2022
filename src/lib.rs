@@ -1,4 +1,5 @@
 pub mod day03;
+pub mod day05;
 pub mod wrapper;
 
 use std::fs::read_to_string;
@@ -8,7 +9,7 @@ use wrapper::*;
 
 pub fn load_to_string(path: &str) -> Result<String, Box<dyn std::error::Error>> {
     let mut input = read_to_string(path)?
-        .trim()
+        .trim_end()
         .lines()
         .collect::<Vec<&str>>()
         .join("\n");
@@ -85,4 +86,14 @@ fn day04a_test() {
 #[test]
 fn day04b_test() {
     assert_eq!(852, day04b());
+}
+
+#[test]
+fn day05a_rust_test() {
+    assert_eq!("VRWBSFZWM", day05::day05a());
+}
+
+#[test]
+fn day05b_rust_test() {
+    assert_eq!("RBTWJWMCF", day05::day05b());
 }
