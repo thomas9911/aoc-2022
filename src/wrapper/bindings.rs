@@ -42,3 +42,9 @@ extern "C" {
 extern "C" {
     pub fn day04b(text: *const ::std::os::raw::c_char) -> ::std::os::raw::c_long;
 }
+extern "C" {
+    pub fn day06a(text: *const ::std::os::raw::c_char) -> ::std::os::raw::c_long;
+}
+extern "C" {
+    pub fn day06b(text: *const ::std::os::raw::c_char) -> ::std::os::raw::c_long;
+}

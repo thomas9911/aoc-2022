@@ -97,3 +97,13 @@ fn day05a_rust_test() {
 fn day05b_rust_test() {
     assert_eq!("RBTWJWMCF", day05::day05b());
 }
+
+#[test]
+fn day06a_test() {
+    assert_eq!(1640, day06a());
+}
+
+#[test]
+fn day06b_test() {
+    assert_eq!(1234, day06b());
+}
