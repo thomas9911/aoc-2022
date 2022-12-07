@@ -4,3 +4,4 @@
 // #include <day03/lib.c>
 #include <day04/lib.c>
 #include <day06/lib.c>
+#include <day07/lib.c>
