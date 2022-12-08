@@ -5,3 +5,4 @@
 #include <day04/lib.c>
 #include <day06/lib.c>
 #include <day07/lib.c>
+#include <day08/lib.c>
