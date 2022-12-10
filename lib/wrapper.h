@@ -28,3 +28,6 @@ long day08b(const char *text);
 
 long day09a(const char *text);
 long day09b(const char *text);
+
+long day10a(const char *text);
+long day10b(const char *text, unsigned char *output);

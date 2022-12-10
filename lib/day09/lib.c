@@ -231,7 +231,7 @@ long day09b(const char *text)
         visited_fields++;
     }
 
-    print_trail(visited_path);
+    // print_trail(visited_path);
 
     hashmap_free(visited_path);
 

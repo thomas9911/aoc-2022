@@ -7,3 +7,4 @@
 #include <day07/lib.c>
 #include <day08/lib.c>
 #include <day09/lib.c>
+#include <day10/lib.c>

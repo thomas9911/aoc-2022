@@ -60,3 +60,12 @@ extern "C" {
 extern "C" {
     pub fn day09b(text: *const ::std::os::raw::c_char) -> ::std::os::raw::c_long;
 }
+extern "C" {
+    pub fn day10a(text: *const ::std::os::raw::c_char) -> ::std::os::raw::c_long;
+}
+extern "C" {
+    pub fn day10b(
+        text: *const ::std::os::raw::c_char,
+        output: *mut ::std::os::raw::c_uchar,
+    ) -> ::std::os::raw::c_long;
+}
