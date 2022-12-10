@@ -25,3 +25,6 @@ long day06b(const char *text);
 
 long day08a(const char *text);
 long day08b(const char *text);
+
+long day09a(const char *text);
+long day09b(const char *text);

@@ -128,3 +128,13 @@ fn day08a_test() {
 fn day08b_test() {
     assert_eq!(504000, day08b());
 }
+
+#[test]
+fn day09a_test() {
+    assert_eq!(6642, day09a());
+}
+
+#[test]
+fn day09b_test() {
+    assert_eq!(1234, day09b());
+}

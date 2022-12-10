@@ -6,3 +6,4 @@
 #include <day06/lib.c>
 #include <day07/lib.c>
 #include <day08/lib.c>
+#include <day09/lib.c>
