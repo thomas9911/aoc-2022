@@ -51,14 +51,10 @@ pub struct Test {
 
 impl Test {
     pub fn next_monkey(&self, item: InterestLevelInteger) -> usize {
-        self.next_monkey_with_result(item).1
-    }
-
-    pub fn next_monkey_with_result(&self, item: InterestLevelInteger) -> (bool, usize) {
         if item % self.test == 0 {
-            (true, self.if_true)
+            self.if_true
         } else {
-            (false, self.if_false)
+            self.if_false
         }
     }
 }
