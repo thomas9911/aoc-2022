@@ -44,13 +44,13 @@ impl<'a> Line<'a> {
         };
 
         // output
-        if let Some((left, right)) = text.split_once(" ") {
+        if let Some((left, right)) = text.split_once(' ') {
             if left == "dir" {
                 return Some(Line::Output(Listing::Directory(right)));
             } else {
                 let size = left.parse().ok()?;
                 return Some(Line::Output(Listing::File {
-                    size: size,
+                    size,
                     name: right,
                 }));
             }
@@ -113,7 +113,7 @@ pub enum FileSystemItem {
     File(File),
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Default)]
 pub struct FileSystem {
     data: HashMap<String, FileSystemItem>,
     size: usize,
@@ -121,14 +121,11 @@ pub struct FileSystem {
 
 impl FileSystem {
     pub fn new() -> FileSystem {
-        FileSystem {
-            data: HashMap::new(),
-            size: 0,
-        }
+        FileSystem::default()
     }
 
     pub fn load(&mut self, input: &str) -> Result<(), Box<dyn std::error::Error>> {
-        let mut iter = LineEmittor::new(&input);
+        let mut iter = LineEmittor::new(input);
         assert_eq!(Some(Line::Command(Command::Cd("/"))), iter.next());
         self.inner_load(&mut iter)
     }
@@ -143,7 +140,7 @@ impl FileSystem {
                             let mut sub_file_system = FileSystem::new();
                             sub_file_system.inner_load(iter)?;
 
-                            match self.data.get_mut(*path).ok_or_else(|| "invalid path")? {
+                            match self.data.get_mut(*path).ok_or("invalid path")? {
                                 FileSystemItem::File(_) => {
                                     return Err("file specified as dir".into())
                                 }
@@ -186,7 +183,7 @@ impl FileSystem {
         Ok(())
     }
 
-    pub fn calculate_folder_sizes(&mut self) -> () {
+    pub fn calculate_folder_sizes(&mut self) {
         let mut total = 0;
         for item in self.data.values_mut() {
             match item {
@@ -220,7 +217,7 @@ impl FileSystem {
             }
         }
 
-        return total;
+        total
     }
 
     pub fn minimal_deleted_folder_size(&self, total: usize) -> usize {
@@ -230,12 +227,8 @@ impl FileSystem {
                 FileSystemItem::File(_) => (),
                 FileSystemItem::Dir(dir) => {
                     if let Some(nested_file_system) = &dir.nested {
-                        if (TOTAL_DISK_SPACE - total + nested_file_system.size)
-                            >= REQUIRED_DISK_SPACE
-                        {
-                            if nested_file_system.size < minimum {
-                                minimum = nested_file_system.size
-                            }
+                        if (TOTAL_DISK_SPACE - total + nested_file_system.size) >= REQUIRED_DISK_SPACE && nested_file_system.size < minimum {
+                            minimum = nested_file_system.size
                         }
                         let inner_score = nested_file_system.minimal_deleted_folder_size(total);
                         if inner_score < minimum {
@@ -246,7 +239,7 @@ impl FileSystem {
             }
         }
 
-        return minimum;
+        minimum
     }
 }
 

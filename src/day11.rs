@@ -82,7 +82,7 @@ pub fn parse_file(file: File) -> Monkeys {
 
     for line in reader.lines().chain(std::iter::once(Ok("".to_string()))) {
         let line = line.expect("invalid line");
-        if line == "" {
+        if line.is_empty() {
             // new monkey
             monkeys.insert(
                 index,
@@ -163,7 +163,7 @@ fn play_round(monkeys: &mut Monkeys, counter: &mut BTreeMap<usize, usize>) {
         let mut playing_monkey = monkeys.remove(&index).expect("monkey not found");
 
         while let Some(item) = playing_monkey.starting_items.pop_front() {
-            let mut item = item.clone();
+            let mut item = item;
             item = playing_monkey.operation.apply(item);
             item /= 3; // the operation that is never used :O (/=)
 
@@ -192,13 +192,13 @@ fn play_round_modulo(
         let mut playing_monkey = monkeys.remove(&index).expect("monkey not found");
 
         while let Some(item) = playing_monkey.starting_items.pop_front() {
-            let mut item = item.clone();
+            let mut item = item;
             item = playing_monkey.operation.apply_modulo(item, modulo);
 
             let entry = counter.entry(index).or_insert(0);
             *entry += 1;
 
-            item = item % modulo;
+            item %= modulo;
 
             let next_monkey = playing_monkey.test.next_monkey(item);
 

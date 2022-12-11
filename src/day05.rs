@@ -90,7 +90,7 @@ impl<'a> Storage<'a> {
 
     pub fn parse(input: &'a str) -> Result<Storage<'a>, Box<dyn std::error::Error>> {
         let mut line_iterator = input.lines().rev();
-        let last_line = line_iterator.next().ok_or_else(|| "invalid last line")?;
+        let last_line = line_iterator.next().ok_or("invalid last line")?;
         let row_indexes: Vec<&str> = last_line.split_whitespace().collect();
         let mut storage = Storage::new(row_indexes);
 
