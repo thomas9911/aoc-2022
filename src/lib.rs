@@ -2,6 +2,8 @@ pub mod day03;
 pub mod day05;
 pub mod day07;
 pub mod day11;
+// pub mod day12;
+pub mod day13;
 pub mod wrapper;
 
 use std::fs::read_to_string;
@@ -167,4 +169,24 @@ fn day11a_test() {
 #[test]
 fn day11b_test() {
     assert_eq!(32333418600, day11::day11b());
+}
+
+// #[test]
+// fn day12a_test() {
+//     assert_eq!(1234, day12::day12a());
+// }
+
+// #[test]
+// fn day12b_test() {
+//     assert_eq!(1234, day12::day12b());
+// }
+
+#[test]
+fn day13a_test() {
+    assert_eq!(6046, day13::day13a());
+}
+
+#[test]
+fn day13b_test() {
+    assert_eq!(1234, day13::day13b());
 }

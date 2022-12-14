@@ -49,10 +49,7 @@ impl<'a> Line<'a> {
                 return Some(Line::Output(Listing::Directory(right)));
             } else {
                 let size = left.parse().ok()?;
-                return Some(Line::Output(Listing::File {
-                    size,
-                    name: right,
-                }));
+                return Some(Line::Output(Listing::File { size, name: right }));
             }
         };
 
@@ -227,7 +224,10 @@ impl FileSystem {
                 FileSystemItem::File(_) => (),
                 FileSystemItem::Dir(dir) => {
                     if let Some(nested_file_system) = &dir.nested {
-                        if (TOTAL_DISK_SPACE - total + nested_file_system.size) >= REQUIRED_DISK_SPACE && nested_file_system.size < minimum {
+                        if (TOTAL_DISK_SPACE - total + nested_file_system.size)
+                            >= REQUIRED_DISK_SPACE
+                            && nested_file_system.size < minimum
+                        {
                             minimum = nested_file_system.size
                         }
                         let inner_score = nested_file_system.minimal_deleted_folder_size(total);
