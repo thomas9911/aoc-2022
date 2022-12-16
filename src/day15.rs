@@ -23,10 +23,76 @@ impl Sensor {
     pub fn covers(&self, location: &Pair) -> bool {
         manhattan_distance(&self.pos, location) <= self.distance
     }
+
+    pub fn edges_iter(&self) -> SensorEdgeIter {
+        SensorEdgeIter {
+            mid_point: self.pos.clone(),
+            distance: self.distance + 1,
+            offset: (0, self.distance + 1),
+            direction: (true, false),
+            first: true,
+        }
+    }
+}
+
+struct SensorEdgeIter {
+    mid_point: Pair,
+    distance: i32,
+    offset: Pair,
+    direction: (bool, bool),
+    first: bool,
+}
+
+impl Iterator for SensorEdgeIter {
+    type Item = Pair;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        if !self.first && self.offset == (0, self.distance) {
+            return None;
+        }
+
+        let (x, y) = self.offset;
+
+        if x == self.distance {
+            self.first = false;
+            self.direction.0 = false;
+        }
+
+        if x == -self.distance {
+            self.first = false;
+            self.direction.0 = true;
+        }
+
+        if y == self.distance {
+            self.direction.1 = false;
+        }
+
+        if y == -self.distance {
+            self.direction.1 = true;
+        }
+
+        let x_asdf = if self.direction.0 {
+            self.offset.0 += 1;
+            self.mid_point.0 + x
+        } else {
+            self.offset.0 -= 1;
+            self.mid_point.0 + x
+        };
+
+        let y_asdf = if self.direction.1 {
+            self.offset.1 += 1;
+            self.mid_point.1 + y
+        } else {
+            self.offset.1 -= 1;
+            self.mid_point.1 + y
+        };
+
+        Some((x_asdf, y_asdf))
+    }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-struct Sensors {
+pub struct Sensors {
     sensors: Vec<Sensor>,
     range_x: RangeInclusive<i32>,
     range_y: RangeInclusive<i32>,
@@ -157,6 +223,30 @@ impl Sensors {
         }
         count
     }
+
+    pub fn find_distress_beacon(&self) -> Option<Pair> {
+        for loop_sensor in self.sensors.iter() {
+            'second: for border_point in loop_sensor.edges_iter() {
+                if !self.range_x.contains(&border_point.0)
+                    || !self.range_y.contains(&border_point.1)
+                {
+                    continue;
+                }
+
+                for check_sensor in self.sensors.iter() {
+                    if loop_sensor == check_sensor {
+                        continue;
+                    }
+                    if check_sensor.covers(&border_point) {
+                        continue 'second;
+                    }
+                }
+
+                return Some(border_point);
+            }
+        }
+        None
+    }
 }
 
 pub fn day15a() -> usize {
@@ -169,19 +259,20 @@ pub fn day15a() -> usize {
     sensors.count_covered_row(y_line)
 }
 
+/// after looking on the internet for hints
 pub fn day15b() -> usize {
     let file = File::open("data/day15/day15b.txt").unwrap();
 
     let mut sensors = Sensors::from_file(file).unwrap();
+    // sensors.range_x = 0..=20;
+    // sensors.range_y = 0..=20;
 
-    sensors.range_x = RangeInclusive::new(0, 20);
-    sensors.range_y = RangeInclusive::new(0, 20);
-    // dbg!(sensors);
-    // sensors.print_covered_row(9);
-    for y in sensors.range_y.clone() {
-        // println!("{}: {}", y, sensors.count_covered_row(y));
-        // sensors.print_covered_row(y);
+    sensors.range_x = 0..=4000000;
+    sensors.range_y = 0..=4000000;
+
+    if let Some(point) = sensors.find_distress_beacon() {
+        return point.0 as usize * 4000000 + point.1 as usize;
     }
-    // sensors.count_covered_row(y_line)
+
     1
 }
